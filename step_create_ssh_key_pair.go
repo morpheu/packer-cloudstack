@@ -2,7 +2,7 @@ package cloudstack
 
 import (
 	"fmt"
-	"github.com/mindjiver/gopherstack"
+	"github.com/morpheu/gopherstack"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/common/uuid"
 	"github.com/mitchellh/packer/packer"

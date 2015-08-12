@@ -6,7 +6,7 @@ package cloudstack
 import (
 	"errors"
 	"fmt"
-	"github.com/mindjiver/gopherstack"
+	"github.com/morpheu/gopherstack"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/common"
 	"github.com/mitchellh/packer/packer"
@@ -16,7 +16,7 @@ import (
 )
 
 // The unique id for the builder
-const BuilderId = "mindjiver.cloudstack"
+const BuilderId = "morpheu.cloudstack"
 
 // Configuration tells the builder the credentials to use while
 // communicating with Cloudstack and describes the template you are

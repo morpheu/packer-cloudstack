@@ -2,7 +2,7 @@ package cloudstack
 
 import (
 	"fmt"
-	"github.com/mindjiver/gopherstack"
+	"github.com/morpheu/gopherstack"
 	"log"
 	"net/url"
 )
