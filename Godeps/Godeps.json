@@ -1,0 +1,68 @@
+{
+	"ImportPath": "github.com/schubergphilis/packer-cloudstack",
+	"GoVersion": "go1.4.2",
+	"Deps": [
+		{
+			"ImportPath": "code.google.com/p/go.crypto/ssh",
+			"Comment": "null-236",
+			"Rev": "69e2a90ed92d03812364aeb947b7068dc42e561e"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/go-multierror",
+			"Rev": "56912fb08d85084aa318edcf2bba735b97cf35c5"
+		},
+		{
+			"ImportPath": "github.com/hashicorp/go-version",
+			"Rev": "999359b6b7a041ce16e695d51e92145b83f01087"
+		},
+		{
+			"ImportPath": "github.com/mindjiver/gopherstack",
+			"Comment": "1.1.0-1-geab5118",
+			"Rev": "eab51186626bf5d36940637ce1b42201c1b63573"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/go-fs",
+			"Rev": "a34c1b9334e86165685a9449b782f20465eb8c69"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/iochan",
+			"Rev": "87b45ffd0e9581375c491fef3d32130bb15c5bd7"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/mapstructure",
+			"Rev": "281073eb9eb092240d33ef253c404f1cca550309"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/multistep",
+			"Rev": "162146fc57112954184d90266f4733e900ed05a5"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/packer/common",
+			"Comment": "v0.8.2-102-ga4e8a92",
+			"Rev": "9cd66feeacbd9cb318b72eb5ed59428c5b8c37ac"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/packer/communicator/ssh",
+			"Comment": "v0.8.2-102-ga4e8a92",
+			"Rev": "9cd66feeacbd9cb318b72eb5ed59428c5b8c37ac"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/packer/packer",
+			"Comment": "v0.8.2-102-ga4e8a92",
+			"Rev": "9cd66feeacbd9cb318b72eb5ed59428c5b8c37ac"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/packer/template",
+			"Comment": "v0.8.2-102-ga4e8a92",
+			"Rev": "9cd66feeacbd9cb318b72eb5ed59428c5b8c37ac"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/reflectwalk",
+			"Rev": "eecf4c70c626c7cfbb95c90195bc34d386c74ac6"
+		},
+		{
+			"ImportPath": "golang.org/x/crypto/ssh",
+			"Rev": "2f3083f6163ef51179ad42ed523a18c9a1141467"
+		}
+	]
+}
