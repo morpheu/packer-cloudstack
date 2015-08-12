@@ -17,7 +17,7 @@ func (s *stepDetachIso) Run(state multistep.StateBag) multistep.StepAction {
 	ui := state.Get("ui").(packer.Ui)
 	id := state.Get("virtual_machine_id").(string)
 
-	response, err := client.ListVirtualMachines(id)
+	response, err := client.ListVirtualMachines(id, c.ProjectId, "")
 	if err != nil {
 		err := fmt.Errorf("Error checking virtual machine state: %s", err)
 		state.Put("error", err)

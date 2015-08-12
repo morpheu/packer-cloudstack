@@ -22,7 +22,7 @@ func (s *stepCreateTemplate) Run(state multistep.StateBag) multistep.StepAction 
 
 	if osId == "" {
 		// get the volume id for the system volume for Virtual Machine 'id'
-		listVmResponse, err := client.ListVirtualMachines(vmid)
+		listVmResponse, err := client.ListVirtualMachines(vmid, c.ProjectId, "")
 		if err != nil {
 			err := fmt.Errorf("Error creating template: %s", err)
 			state.Put("error", err)

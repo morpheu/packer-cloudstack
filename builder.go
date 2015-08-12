@@ -54,6 +54,7 @@ type config struct {
 
 	// Neccessary settings for Cloudstack to be able to spin up
 	// Virtual Machine with either template or a ISO.
+	ProjectId         string   `mapstructure:"project_id"`
 	ServiceOfferingId string   `mapstructure:"service_offering_id"`
 	TemplateId        string   `mapstructure:"template_id"`
 	ZoneId            string   `mapstructure:"zone_id"`
@@ -170,6 +171,7 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 		"ssh_password":          &b.config.SSHPassword,
 		"http_directory":        &b.config.HTTPDir,
 		"service_offering_id":   &b.config.ServiceOfferingId,
+		"project_id":            &b.config.ProjectId,
 		"template_id":           &b.config.TemplateId,
 		"zone_id":               &b.config.ZoneId,
 		"disk_offering_id":      &b.config.DiskOfferingId,

@@ -14,10 +14,11 @@ func (s *stepVirtualMachineState) Run(state multistep.StateBag) multistep.StepAc
 	client := state.Get("client").(*gopherstack.CloudstackClient)
 	ui := state.Get("ui").(packer.Ui)
 	id := state.Get("virtual_machine_id").(string)
+	c := state.Get("config").(config)
 
 	ui.Say("Waiting for virtual machine to become active...")
 
-	err := client.WaitForVirtualMachineState(id, "Running", 2*time.Minute)
+	err := client.WaitForVirtualMachineState(id, "Running", 2*time.Minute, c.ProjectId, "")
 	if err != nil {
 		err := fmt.Errorf("Error waiting for virtual machine to become active: %s", err)
 		state.Put("error", err)
@@ -26,7 +27,7 @@ func (s *stepVirtualMachineState) Run(state multistep.StateBag) multistep.StepAc
 	}
 
 	// Set the IP on the state for later
-	response, err := client.ListVirtualMachines(id)
+	response, err := client.ListVirtualMachines(id, c.ProjectId, "")
 	if err != nil {
 		err := fmt.Errorf("Error retrieving virtual machine ID: %s", err)
 		state.Put("error", err)

@@ -37,7 +37,7 @@ func (s *stepDeployVirtualMachine) Run(state multistep.StateBag) multistep.StepA
 	// Create the virtual machine based on configuration
 	response, err := client.DeployVirtualMachine(c.ServiceOfferingId,
 		c.TemplateId, c.ZoneId, "", c.DiskOfferingId, displayName,
-		c.NetworkIds, sshKeyName, "", userData, c.Hypervisor)
+		c.NetworkIds, sshKeyName, c.ProjectId, userData, c.Hypervisor)
 
 	if err != nil {
 		err := fmt.Errorf("Error deploying virtual machine: %s", err)
@@ -73,7 +73,7 @@ func (s *stepDeployVirtualMachine) Cleanup(state multistep.StateBag) {
 	// Destroy the virtual machine we just created
 	ui.Say("Destroying virtual machine...")
 
-	response, err := client.DestroyVirtualMachine(s.id)
+	response, err := client.DestroyVirtualMachine(s.id, c.ProjectId, "")
 	if err != nil {
 		ui.Error(fmt.Sprintf(
 			"Error destroying virtual machine. Please destroy it manually."))
