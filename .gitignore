@@ -7,3 +7,8 @@
 .DS_Store
 .vagrant
 test/.env
+*.test
+dist-*
+Godeps/_workspace
+Godeps/Readme
+build
