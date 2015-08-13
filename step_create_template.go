@@ -42,7 +42,7 @@ func (s *stepCreateTemplate) Run(state multistep.StateBag) multistep.StepAction 
 	}
 
 	// get the volume id for the system volume for Virtual Machine 'id'
-	response, err := client.ListVolumes(vmid)
+	response, err := client.ListVolumes(vmid, c.ProjectId, "")
 	if err != nil {
 		err := fmt.Errorf("Error creating template: %s", err)
 		state.Put("error", err)
@@ -62,6 +62,8 @@ func (s *stepCreateTemplate) Run(state multistep.StateBag) multistep.StepAction 
 		Isfeatured:            c.TemplateFeatured,
 		Isextractable:         c.TemplateExtractable,
 		Passwordenabled:       c.TemplatePasswordEnabled,
+        ProjectId:             c.ProjectId,
+        Account:               "",
 	}
 
 	response2, err := client.CreateTemplate(createOpts)
@@ -83,7 +85,7 @@ func (s *stepCreateTemplate) Run(state multistep.StateBag) multistep.StepAction 
 	}
 
 	log.Printf("Looking up template ID for template: %s", c.TemplateName)
-	response3, err := client.ListTemplates(c.TemplateName, "self")
+	response3, err := client.ListTemplates(c.TemplateName, "self", c.ProjectId, "")
 	if err != nil {
 		err := fmt.Errorf("Error looking up template ID: %s", err)
 		state.Put("error", err)

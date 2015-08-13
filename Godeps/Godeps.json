@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/schubergphilis/packer-cloudstack",
+	"ImportPath": "github.com/morpheu/packer-cloudstack",
 	"GoVersion": "go1.4.2",
 	"Deps": [
 		{
