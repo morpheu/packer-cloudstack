@@ -6,10 +6,10 @@ package cloudstack
 import (
 	"errors"
 	"fmt"
-	"github.com/morpheu/gopherstack"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/common"
 	"github.com/mitchellh/packer/packer"
+	"github.com/morpheu/gopherstack"
 	"log"
 	"os"
 	"time"
@@ -62,6 +62,7 @@ type config struct {
 	DiskOfferingId    string   `mapstructure:"disk_offering_id"`
 	UserData          string   `mapstructure:"user_data"`
 	Hypervisor        string   `mapstructure:"hypervisor"`
+	Size              string   `mapstructure:"size"`
 
 	// Tell Cloudstack under which name, description to save the
 	// template.

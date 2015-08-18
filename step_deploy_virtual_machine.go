@@ -2,10 +2,10 @@ package cloudstack
 
 import (
 	"fmt"
-	"github.com/morpheu/gopherstack"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/common/uuid"
 	"github.com/mitchellh/packer/packer"
+	"github.com/morpheu/gopherstack"
 )
 
 type stepDeployVirtualMachine struct {
@@ -37,7 +37,7 @@ func (s *stepDeployVirtualMachine) Run(state multistep.StateBag) multistep.StepA
 	// Create the virtual machine based on configuration
 	response, err := client.DeployVirtualMachine(c.ServiceOfferingId,
 		c.TemplateId, c.ZoneId, "", c.DiskOfferingId, displayName,
-		c.NetworkIds, sshKeyName, c.ProjectId, userData, c.Hypervisor)
+		c.NetworkIds, sshKeyName, c.ProjectId, userData, c.Hypervisor, c.Size)
 
 	if err != nil {
 		err := fmt.Errorf("Error deploying virtual machine: %s", err)

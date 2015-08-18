@@ -2,9 +2,9 @@ package cloudstack
 
 import (
 	"fmt"
-	"github.com/morpheu/gopherstack"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/packer"
+	"github.com/morpheu/gopherstack"
 )
 
 type stepCreateTags struct{}

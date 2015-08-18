@@ -3,9 +3,9 @@ package cloudstack
 import (
 	"errors"
 	"fmt"
-	"github.com/morpheu/gopherstack"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/packer"
+	"github.com/morpheu/gopherstack"
 	"log"
 )
 
@@ -62,8 +62,8 @@ func (s *stepCreateTemplate) Run(state multistep.StateBag) multistep.StepAction 
 		Isfeatured:            c.TemplateFeatured,
 		Isextractable:         c.TemplateExtractable,
 		Passwordenabled:       c.TemplatePasswordEnabled,
-        ProjectId:             c.ProjectId,
-        Account:               "",
+		ProjectId:             c.ProjectId,
+		Account:               "",
 	}
 
 	response2, err := client.CreateTemplate(createOpts)

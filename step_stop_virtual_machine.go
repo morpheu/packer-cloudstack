@@ -2,9 +2,9 @@ package cloudstack
 
 import (
 	"fmt"
-	"github.com/morpheu/gopherstack"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/packer"
+	"github.com/morpheu/gopherstack"
 	"log"
 )
 
@@ -34,7 +34,7 @@ func (s *stepStopVirtualMachine) Run(state multistep.StateBag) multistep.StepAct
 
 	// Stop the virtual machine
 	ui.Say("Stopping virtual machine...")
-	response2, err := client.StopVirtualMachine(id, c.ProjectId, "" )
+	response2, err := client.StopVirtualMachine(id, c.ProjectId, "")
 	if err != nil {
 		err := fmt.Errorf("Error stopping virtual machine: %s", err)
 		state.Put("error", err)

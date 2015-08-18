@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/morpheu/packer-cloudstack"
 	"github.com/mitchellh/packer/packer/plugin"
+	"github.com/morpheu/packer-cloudstack"
 )
 
 func main() {
