@@ -9,7 +9,9 @@ import (
 	"log"
 )
 
-type stepCreateTemplate struct{}
+type stepCreateTemplate struct{
+    snapshot_id string
+}
 
 func (s *stepCreateTemplate) Run(state multistep.StateBag) multistep.StepAction {
 	client := state.Get("client").(*gopherstack.CloudstackClient)
@@ -42,7 +44,7 @@ func (s *stepCreateTemplate) Run(state multistep.StateBag) multistep.StepAction 
 	}
 
 	// get the volume id for the system volume for Virtual Machine 'id'
-	response, err := client.ListVolumes(vmid, c.ProjectId, "")
+	list_volumes, err := client.ListVolumes(vmid, c.ProjectId, "")
 	if err != nil {
 		err := fmt.Errorf("Error creating template: %s", err)
 		state.Put("error", err)
@@ -51,11 +53,34 @@ func (s *stepCreateTemplate) Run(state multistep.StateBag) multistep.StepAction 
 	}
 
 	// always use the first volume when creating a template
-	volumeId := response.Listvolumesresponse.Volume[0].ID
+	rootId := list_volumes.Listvolumesresponse.Volume[0].ID
+
+	// create snapshot for allow template export
+	ui.Say("Creating snapshot from root disk...")
+	create_snapshot, err := client.CreateSnapshot(rootId, c.ProjectId, "")
+	if err != nil {
+		err := fmt.Errorf("Error creating snapshot from root disk: %s", err)
+		state.Put("error", err)
+		ui.Error(err.Error())
+		return multistep.ActionHalt
+	}
+
+    snapshot_jobid := create_snapshot.Createsnapshotresponse.JobId
+	err = client.WaitForAsyncJob(snapshot_jobid, c.stateTimeout)
+	if err != nil {
+		err := fmt.Errorf("Error waiting for template to complete: %s", err)
+		state.Put("error", err)
+		ui.Error(err.Error())
+		return multistep.ActionHalt
+	}
+
+    list_snapshots, err := client.ListSnapshots(rootId, c.ProjectId, "")
+	s.snapshot_id = list_snapshots.Listsnapshotsresponse.Snapshot[0].ID
+
 	createOpts := &gopherstack.CreateTemplate{
 		Name:                  c.TemplateName,
 		Displaytext:           c.TemplateDisplayText,
-		Volumeid:              volumeId,
+		Snapshotid:            s.snapshot_id,
 		Ostypeid:              osId,
 		Isdynamicallyscalable: c.TemplateScalable,
 		Ispublic:              c.TemplatePublic,
@@ -112,5 +137,23 @@ func (s *stepCreateTemplate) Run(state multistep.StateBag) multistep.StepAction 
 }
 
 func (s *stepCreateTemplate) Cleanup(state multistep.StateBag) {
-	// no cleanup
+    client := state.Get("client").(*gopherstack.CloudstackClient)
+    ui := state.Get("ui").(packer.Ui)
+	c := state.Get("config").(config)
+
+    if s.snapshot_id == "" {
+        return
+    }
+
+    ui.Say("Removing machine disk snapshot")
+    response, err := client.DeleteSnapshot(s.snapshot_id, c.ProjectId, "")
+
+	if err != nil {
+		ui.Error(fmt.Sprintf(
+			"Error removing snapshot. Please destroy it manually."))
+	}
+
+	status := response.Deletesnapshotresponse.Success
+    ui.Say(fmt.Sprintf("Snapshot removal status: %s", status))
+
 }
