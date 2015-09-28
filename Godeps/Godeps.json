@@ -18,7 +18,7 @@
 		{
 			"ImportPath": "github.com/morpheu/gopherstack",
 			"Comment": "1.1.0-1-geab5118",
-			"Rev": "b743e4c69eb0adcc2e0e30e25cd97d8ae32f33b3"
+			"Rev": "a7ac15f598b860aa6aab504cdc089a2d912bffb5"
 		},
 		{
 			"ImportPath": "github.com/mitchellh/go-fs",
