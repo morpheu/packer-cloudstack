@@ -153,4 +153,7 @@ func (s *stepCreateTemplate) Cleanup(state multistep.StateBag) {
 			"Error removing snapshot. Please destroy it manually."))
 	}
 
+	status := response.Deletesnapshotresponse.Success
+    ui.Say(fmt.Sprintf("Snapshot removal status: %s", status))
+
 }
